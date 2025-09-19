@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env dosyaları
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Build output
+dist/
+build/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Lock dosyaları (opsiyonel)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
