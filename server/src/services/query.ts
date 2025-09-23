@@ -2,24 +2,21 @@ import pool from "../lib/dbConnect";
 
 export abstract class BaseServices<T> {
   protected tableName: string;
+  protected selectableFields:string ="*"
 
   constructor(tableName: string) {
     this.tableName = tableName;
   }
 
   protected async getAll(): Promise<T[]> {
-    const result = await pool.query(`SELECT * FROM ${this.tableName}`);
+    const result = await pool.query(`SELECT ${this.selectableFields} FROM ${this.tableName}`);
     return result.rows;
-  }
-  protected async getData(columns?:string[]):Promise<T[]>{
-    const cols =(!columns || columns.length>0) ? "*" : columns.join(", ")
-    const result=await pool.query(`SELECT ${cols} FROM ${this.tableName}`)
-    return result.rows
   }
 
-  protected async getOne(id: number): Promise<Partial<T>[]> {
-    const result = await pool.query(`SELECT * FROM ${this.tableName} WHERE id = $1`,[id]);
-    return result.rows;
+
+  protected async getOne<K extends keyof T>(column:K,value:T[K]): Promise<T | null> {
+    const result = await pool.query(`SELECT * FROM ${this.tableName} WHERE ${String(column)} = $1 LIMIT 1`,[value]);
+    return result.rows[0] || null;
   }
   
 

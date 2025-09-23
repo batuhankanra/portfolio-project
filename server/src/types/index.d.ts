@@ -12,7 +12,17 @@ export interface UserProps{
   id:number
   name:string
   email:string
-  passport_hash:string
+  password_hash:string
+  role:string
+  created_at: Date
+  updated_at: Date
+}
+
+export interface UserCols{
+  id:number
+  name:string
+  email:string
+  role:string
   role:string
   created_at: Date
   updated_at: Date

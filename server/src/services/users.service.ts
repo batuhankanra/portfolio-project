@@ -13,34 +13,26 @@ export class UserServices extends BaseServices<UserProps> {
     ])
     constructor() {
         super("users");
+        this.selectableFields='"id","name","email","role","created_at","updated_at"'
     }
 
-    public async getBlogs(): Promise<UserProps[]> {
+    public async getAllUser(): Promise<UserProps[]> {
         return this.getAll();
     }
-    public async getUsers(columns?:string[]){
-        let safeCols: string[] | undefined
-        if(columns && columns.length >0){
-            safeCols=columns.filter(c=>this.allowedColums.has(c))
-            if(safeCols.length===0){
-                throw new Error("no volid columns provided")
-            }
-        }
-        return this.getData
-    }
-    public async getOneBlog(id: number): Promise<UserProps | null> {
-        return null
+   
+    public async getEmail(email: string): Promise<UserProps | null> {
+        return this.getOne("email",email)
     }
 
-    public async addBlog(blog: Partial<UserProps>): Promise<UserProps> {
-        return this.create(blog);
+    public async addUser(data: Partial<UserProps>): Promise<UserProps> {
+        return this.create(data);
     }
 
-    public async updateBlog(id: number, blog: Partial<UserProps>): Promise<UserProps | null> {
+    public async updateUser(id: number, blog: Partial<UserProps>): Promise<UserProps | null> {
         return this.update(id, blog);
     }
 
-    public async deleteBlog(id: number): Promise<boolean> {
+    public async deleteUser(id: number): Promise<boolean> {
         return this.delete(id);
     }
 }
