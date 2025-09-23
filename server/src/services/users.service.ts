@@ -2,15 +2,6 @@ import {  UserProps } from "../types";
 import { BaseServices } from "./query";
 
 export class UserServices extends BaseServices<UserProps> {
-    private readonly allowedColums =new Set([
-        "id",
-        "name",
-        "email",
-        "password_hash",
-        "role",
-        "created_at",
-        "updated_at"
-    ])
     constructor() {
         super("users");
         this.selectableFields='"id","name","email","role","created_at","updated_at"'
@@ -22,6 +13,9 @@ export class UserServices extends BaseServices<UserProps> {
    
     public async getEmail(email: string): Promise<UserProps | null> {
         return this.getOne("email",email)
+    }
+    public async getId(id: number): Promise<UserProps | null> {
+        return this.getOne("id",id)
     }
 
     public async addUser(data: Partial<UserProps>): Promise<UserProps> {

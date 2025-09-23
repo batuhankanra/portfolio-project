@@ -11,6 +11,5 @@ export const config ={
     "DB_HOST":process.env.DB_HOST,
     "DB_PASSWORD":process.env.DB_PASSWORD,
     "DB_PORT":process.env.DB_PORT,
-    "JWT_SECRET":process.env.JWT_SECRET,
-    "JWT_EXPIRES_IN":process.env.JWT_EXPIRES_IN || "1h"
+    "JWT_SECRET": process.env.JWT_SECRET || "secretkey"
 }

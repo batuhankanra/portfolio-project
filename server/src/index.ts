@@ -6,6 +6,7 @@ import { logger } from './lib/logger';
 import { config } from './config'; 
 import { router } from './routes';
 import pool from './lib/dbConnect';
+import passport from 'passport';
 
 
 
@@ -22,7 +23,9 @@ app.use(cors({origin:process.env.NODE_ENV==='production' ? '...': "http://localh
 app.use(logger);
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false })); 
+app.use(passport.initialize())
 pool
+
 
 // ─────────────────────────────────────────────
 // Statik dosyalar

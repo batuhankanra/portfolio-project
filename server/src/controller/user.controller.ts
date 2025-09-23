@@ -1,6 +1,8 @@
 import { Response,Request } from "express"
 import { users } from "../services/users.service"
 import bcryptjs  from "bcryptjs"
+import jwt from "jsonwebtoken"
+import { config } from "../config"
 
 const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/
@@ -38,6 +40,37 @@ export class UserController{
         }catch(err){
             console.log("register_error:",err)
             res.status(500).json({msg:"error"})
+        }
+    }
+    public static async login(req:Request,res:Response){
+        try{
+            const {email,password}=req.body
+            if(!email || !password){
+                res.status(400).json({msg:"bad request , email is not valid"})
+                return
+            }
+             if(!emailRegex.test(email)){
+                res.status(400).json({msg:"bad request , email is not valid"})
+                return
+            }
+            const user = await users.getEmail(email)
+            if(!user){
+                res.status(401).json({msg:"Email or password is incorrect"})
+                return
+            }
+            const existpassword =await bcryptjs.compare(password,user.password_hash)
+            if(!existpassword){
+                res.status(401).json({msg:"Email or password is incorrect"})
+                return
+            }
+            const token = jwt.sign({id:user.id},config.JWT_SECRET,{expiresIn:"1h"})
+            res.status(200).json({msg:"success",token})
+            return
+
+        }catch (err){
+            console.log(err)
+            res.status(500).json({msg:"error"})
+
         }
     }
     
