@@ -1,7 +1,7 @@
 import { BlogProps } from "../types";
 import { BaseServices } from "./query";
 
-export class BlogServices extends BaseServices<BlogProps> {
+ class BlogServices extends BaseServices<BlogProps> {
     constructor() {
         super("blog");
     }
@@ -10,8 +10,11 @@ export class BlogServices extends BaseServices<BlogProps> {
         return this.getAll();
     }
 
-    public async getOneBlog(id: number): Promise<BlogProps | null> {
-        return this.getOne(id);
+    public async getIdOne(id: number): Promise<BlogProps | null> {
+        return this.getOne("id",id);
+    }
+    public async getName(title:string):Promise<BlogProps | null >{
+        return this.getOne("title",title)
     }
 
     public async addBlog(blog: Partial<BlogProps>): Promise<BlogProps> {
