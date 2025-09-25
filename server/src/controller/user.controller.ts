@@ -64,7 +64,8 @@ export class UserController{
                 return
             }
             const token = jwt.sign({id:user.id},config.JWT_SECRET,{expiresIn:"1h"})
-            res.status(200).json({msg:"success",token})
+            res.cookie("login",token ,{httpOnly:true,secure:config.NODE_ENV,sameSite:"strict"})
+            res.status(200).json({msg:"success"})
             return
 
         }catch (err){
@@ -77,8 +78,6 @@ export class UserController{
 
     public static async getUser(req:Request,res:Response){
         try{
-            const fieldsParam=req.query.fields
-            const fields=fieldsParam ? String(fieldsParam).split(",").map(f=>f.trim()) : undefined
             const result = await users.getAllUser()
             res.status(200).json(result)
             return
@@ -88,6 +87,52 @@ export class UserController{
         }
     }
     public static async getOneUser(req:Request,res:Response){
-
+        try{
+            const {id} =req.params
+            const result = await users.getId(Number(id))
+            res.status(200).json(result)
+            return
+        }catch(err){
+            console.log("getUser:",err)
+            res.status(500).json({msg:"error"})
+        }
     }
+    public static async updateUser(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { name, email, password,oldPassword } = req.body;
+
+      const existingUser = await users.getId(Number(id));
+      if (!existingUser) {
+        res.status(404).json({ msg: "Kullanıcı bulunamadı" })
+        return 
+      }
+      const pasCompare=await bcryptjs.compare(oldPassword,existingUser.password_hash)
+      console.log(pasCompare,oldPassword,password)
+      if(!pasCompare){
+        res.status(400).json({msg:"The password is not the same"})
+        return
+      }
+      let hashedPassword = existingUser.password_hash; 
+      if (password) {
+        if (password.length < 6) {
+           res.status(400).json({ msg: "Şifre en az 6 karakter olmalı" })
+           return
+        }
+        hashedPassword = await bcryptjs.hash(password, 10);
+      }
+
+      const updatedUser = await users.updateUser(Number(id), {
+        name: name || existingUser.name,
+        email: email || existingUser.email,
+        password_hash: hashedPassword,
+      });
+
+       res.status(200).json({msg: "Kullanıcı güncellendi ✅",user: updatedUser});
+       return
+    } catch (err) {
+      console.error("updateUser error:", err);
+      return res.status(500).json({ msg: "Sunucu hatası" });
+    }
+  }
 }

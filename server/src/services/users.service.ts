@@ -22,8 +22,8 @@ export class UserServices extends BaseServices<UserProps> {
         return this.create(data);
     }
 
-    public async updateUser(id: number, blog: Partial<UserProps>): Promise<UserProps | null> {
-        return this.update(id, blog);
+    public async updateUser(id: number, data: Partial<UserProps>): Promise<UserProps | null> {
+        return this.update(id, data);
     }
 
     public async deleteUser(id: number): Promise<boolean> {
