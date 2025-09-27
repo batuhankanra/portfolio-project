@@ -34,3 +34,15 @@ export interface ContactsProps{
   message:string
   created_at:Date
 }
+export interface ProjectsProps{
+  id:number
+  title:string
+  description:string
+  link:string
+  repo_link:string
+  image_link:string
+  tech_stack:string[]
+  created_at: Date
+  updated_at: Date
+  user_id?:string
+}

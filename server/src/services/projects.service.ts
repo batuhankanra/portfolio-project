@@ -1,30 +1,30 @@
-import { BlogProps } from "../types";
+import { ProjectsProps } from "../types";
 import { BaseServices } from "./query"; 
 
-export class BlogServices extends BaseServices<BlogProps> {
+ class Service extends BaseServices<ProjectsProps> {
     constructor() {
         super("projects");
     }
 
-    public async getBlogs(): Promise<BlogProps[]> {
+    public async getProjects(): Promise<ProjectsProps[]> {
         return this.getAll();
     }
 
-    public async getOneBlog(id: number): Promise<BlogProps | null> {
-        return this.getOne(id);
+    public async getIdOne(id: number): Promise<ProjectsProps | null> {
+        return this.getOne("id",id);
     }
 
-    public async addBlog(blog: Partial<BlogProps>): Promise<BlogProps> {
-        return this.create(blog);
+    public async createProject(data: Partial<ProjectsProps>): Promise<ProjectsProps> {
+        return this.create(data);
     }
 
-    public async updateBlog(id: number, blog: Partial<BlogProps>): Promise<BlogProps | null> {
-        return this.update(id, blog);
+    public async updateProject(id: number, data: Partial<ProjectsProps>): Promise<ProjectsProps | null> {
+        return this.update(id, data);
     }
 
-    public async deleteBlog(id: number): Promise<boolean> {
+    public async deleteProject(id: number): Promise<boolean> {
         return this.delete(id);
     }
 }
 
-export const blogs = new BlogServices();
+export const projects = new Service();

@@ -2,6 +2,7 @@ import { Router } from "express";
 import user from "./user.route"
 import blog from "./blog.route"
 import contact from "./contacts.route"
+import project from "./project.route"
 
 export const router=Router()
 
@@ -9,3 +10,4 @@ export const router=Router()
 router.use("/user",user)
 router.use("/blog",blog)
 router.use("/contact",contact)
+router.use("/project",project)
