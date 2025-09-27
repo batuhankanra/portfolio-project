@@ -26,7 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize())
 pool
 
-
 // ─────────────────────────────────────────────
 // Statik dosyalar
 // ─────────────────────────────────────────────
