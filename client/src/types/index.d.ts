@@ -8,6 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     isLoading?:boolean
 }
 
-interface ThemeState{
-    value:"light" | "dark" | "system"
+type Theme = "dark" | "light" | "system";
+
+interface ThemeState {
+  theme: Theme;
 }

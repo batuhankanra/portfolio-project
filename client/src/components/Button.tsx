@@ -3,12 +3,12 @@ import clsx from 'clsx'
 import type { ButtonProps, ButtonVariant, Size } from '../types'
 
 const Button:React.FC<ButtonProps> = ({variant="primary",size="md",isLoading=false,children,className,...props}) => {
-    const baseStyle="rounded-md border cursor-pointer font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+    const baseStyle="rounded-md  cursor-pointer font-semibold transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
     const variantStyles:Record<ButtonVariant ,string>={
-        primary:"bg-blue-600 text-white hover:bg-blue-700",
+        primary:"bg-primary text-white hover:bg-primary/70",
         secondary:"bg-gray-200 text-gray-800 hover:bg-gray-300",
         danger:"bg-red-600 text-white hover:bg-red-700",
-        outline:"border border-gray-400 text-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
+        outline:"  dark:text-zinc-300 text-zinc-700 hover:bg-gray-100 dark:hover:bg-zinc-800/60"
     }
     const sizeStyles:Record<Size,string>={
         xs: "px-2 py-1 text-xs",
