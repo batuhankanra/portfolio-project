@@ -7,3 +7,8 @@
     --color-third:#C0C9EE;
     --color-fourth:#FFF2E0;
 }
+
+
+body{
+    @apply bg-zinc-100 dark:bg-zinc-700 text-black dark:text-white duration-200
+}

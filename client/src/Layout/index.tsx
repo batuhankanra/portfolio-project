@@ -1,6 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router'
 import Header from './components/header'
+import Footer from './components/footer'
+
+
+
 
 const MainLayout:React.FC = () => {
   const theme=localStorage.getItem("theme")
@@ -17,10 +21,12 @@ const MainLayout:React.FC = () => {
       root.classList.remove("dark");
     }
   }
+  
   return (
-    <div className='dark:bg-zinc-700 '>
+    <div className=' '>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   )
 }

@@ -3,11 +3,15 @@ import { setTheme } from "../store/features/themes";
 import Button from "./Button";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import type { Theme } from "../types";
+import { FaMoon } from "react-icons/fa";
+import { IoSunnySharp } from "react-icons/io5";
+import { HiMiniComputerDesktop } from "react-icons/hi2";
 
-const themes: { value: Theme; label: string }[] = [
-  { value: "dark", label: "Karanlık" },
-  { value: "light", label: "Aydınlık" },
-  { value: "system", label: "Sistem" },
+
+const themes: { value: Theme; label: string,icon:any }[] = [
+  { value: "dark", label: "Dark" ,icon:FaMoon },
+  { value: "light", label: "Light",icon:IoSunnySharp },
+  { value: "system", label: "System",icon:HiMiniComputerDesktop },
 ];
 
 export default function ThemeDropdown() {
@@ -53,14 +57,14 @@ export default function ThemeDropdown() {
                   dispatch(setTheme(item.value));
                   setOpen(false);
                 }}
-                className={`w-full px-4 py-2 text-sm  text-left transition-colors cursor-pointer
+                className={`w-full px-4 py-2 text-sm  text-left transition-colors cursor-pointer flex items-center gap-x-2
                   ${
                     theme === item.value
                       ? "bg-blue-600 text-white"
                       : "hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
               >
-                {item.label}
+                <item.icon />{item.label}
               </button>
             </li>
           ))}

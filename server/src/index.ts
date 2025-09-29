@@ -19,7 +19,7 @@ const app = express();
 
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-app.use(cors({origin:process.env.NODE_ENV==='production' ? '...': "http://localhost:3000",credentials:true}));
+app.use(cors({origin:process.env.NODE_ENV==='production' ? '...': "http://localhost:5173",credentials:true}));
 app.use(logger);
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false })); 
@@ -39,6 +39,9 @@ app.use('/api/uploads', express.static(path.join(__dirname, './public/uploads'))
 // ─────────────────────────────────────────────
 
 app.use("/api",router)
+app.get("/",(req,res)=>{
+  res.status(200).json({msg:"sa"})
+})
 
 
 
