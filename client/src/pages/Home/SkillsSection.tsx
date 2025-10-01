@@ -87,10 +87,10 @@ const SkillsSection: React.FC = () => {
         {/* Başlık */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Yeteneklerim
+            My Skills
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Full-Stack geliştirme alanındaki teknik yeteneklerim
+            My technical skills in Full-Stack development
           </p>
         </div>
 

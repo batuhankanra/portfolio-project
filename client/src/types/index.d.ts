@@ -13,3 +13,16 @@ type Theme = "dark" | "light" | "system";
 interface ThemeState {
   theme: Theme;
 }
+interface ModalProps{
+  modal:string
+}
+interface User{
+  name:string
+  email :string
+}
+interface AuthState{
+  user :User | null
+  isAuthticated:boolean
+  loading:boolean
+  error:string | null
+}

@@ -7,6 +7,7 @@ import { config } from './config';
 import { router } from './routes';
 import pool from './lib/dbConnect';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 
 
 
@@ -24,6 +25,7 @@ app.use(logger);
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false })); 
 app.use(passport.initialize())
+app.use(cookieParser())
 pool
 
 // ─────────────────────────────────────────────

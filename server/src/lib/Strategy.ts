@@ -9,20 +9,21 @@ import { users } from "../services/users.service";
 const cookieExtractor = (req: any) => {
   let token = null;
   if (req && req.cookies) {
-    token = req.cookies["login"]; // 🍪 bizim cookie adı
+    token = req.cookies["login"];
   }
   return token;
 };
 
+
 const options:StrategyOptions={
-    jwtFromRequest:ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken(),cookieExtractor]),
+    jwtFromRequest:ExtractJwt.fromExtractors([cookieExtractor]),
     secretOrKey:config.JWT_SECRET
 } 
 
 passport.use(
     new JwtStrategy(options,async (payload,done)=>{
         try{
-            const existingUser =await users.getId(payload.id)
+            const existingUser =await users.getId(Number(payload.id))
             if(!existingUser){
                 return done(null,false)
             }

@@ -3,10 +3,14 @@ import { Link } from 'react-router';
 import ThemeDropdown from '../../components/themeToggle';
 import SideBar from './sidebar';
 import Logo from '../../components/Logo';
+import Button from '../../components/Button';
+import { useAppDispatch } from '../../store/hook';
+import { setModal } from '../../store/features/modal';
 
 const Header = () => {
   const menu = ["Blog", "Contacts", "Projects"];
   const [scrolled, setScrolled] = useState(false);
+  const dispatch=useAppDispatch()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +32,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`dark:text-white  p-4 backdrop-blur-2xl shadow-lg transition-all duration-300 fixed top-0 w-full z-50 ${
+    <header className={`dark:text-white  p-4 backdrop-blur-2xl shadow-lg transition-all duration-300 fixed top-0 w-full z-40 ${
       scrolled 
         ? 'bg-white/90 dark:bg-gray-900/90 shadow-lg' 
         : 'bg-transparent shadow-none'
@@ -55,6 +59,11 @@ const Header = () => {
           
           <div className="ml-4">
             <ThemeDropdown />
+          </div>
+          <div>
+            <Button onClick={()=>dispatch(setModal({modal:"login"}))} size='sm'>
+              Login
+            </Button>
           </div>
         </div>
         

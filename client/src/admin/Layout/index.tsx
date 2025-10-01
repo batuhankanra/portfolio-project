@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router'
 import Header from './components/header'
 import Footer from './components/footer'
+import { useAppDispatch } from '../../store/hook'
+import { meApi } from '../../store/features/auth/login'
 
 
 
 
-const MainLayout:React.FC = () => {
+const AdminLayout:React.FC = () => {
   const theme=localStorage.getItem("theme")
+  const dispatch=useAppDispatch()
   const root = window.document.documentElement;
   if (theme === "dark") {
     root.classList.add("dark");
@@ -20,6 +23,9 @@ const MainLayout:React.FC = () => {
       root.classList.remove("dark");
     }
   }
+  useEffect(()=>{
+    dispatch(meApi())
+  },[dispatch])
   
   return (
     <div className=' '>
@@ -30,4 +36,4 @@ const MainLayout:React.FC = () => {
   )
 }
 
-export default MainLayout
+export default AdminLayout

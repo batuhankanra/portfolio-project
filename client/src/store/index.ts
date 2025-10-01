@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import theme from "./features/themes/index"
+import modal from "./features/modal/index"
+import loginSlice from "./features/auth/login"
 
 export const store = configureStore({
   reducer: {
     theme,
+    modal,
+    login:loginSlice
   }
 })
 

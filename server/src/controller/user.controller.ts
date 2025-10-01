@@ -64,7 +64,7 @@ export class UserController{
                 return
             }
             const token = jwt.sign({id:user.id},config.JWT_SECRET,{expiresIn:"1h"})
-            res.cookie("login",token ,{httpOnly:true,secure:config.NODE_ENV,sameSite:"strict"})
+            res.cookie("login",token ,{httpOnly:true,secure:config.NODE_ENV,sameSite:"lax"})
             res.status(200).json({msg:"success"})
             return
 
@@ -73,6 +73,18 @@ export class UserController{
             res.status(500).json({msg:"error"})
 
         }
+    }
+    public static async logout(req:Request,res:Response){
+        res.clearCookie("login",{httpOnly:true,secure:config.NODE_ENV,sameSite:"strict"})
+        res.status(200).json({msg:"success"})
+    }
+    public static async me(req:Request,res:Response){
+        const user = req.user as any; // Passport ile doluyor
+        if (!user) return res.status(401).json({ msg: "Unauthorized" });
+        res.status(200).json({name:user.name,email:user.email})
+        return
+
+
     }
     
 
