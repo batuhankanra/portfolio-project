@@ -30,7 +30,9 @@ const AdminLayout:React.FC = () => {
   return (
     <div className=' '>
       <Header />
-      <Outlet />
+      <main className='mt-14'>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   )

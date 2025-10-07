@@ -4,13 +4,10 @@ import ThemeDropdown from '../../components/themeToggle';
 import SideBar from './sidebar';
 import Logo from '../../components/Logo';
 import Button from '../../components/Button';
-import { useAppDispatch } from '../../store/hook';
-import { setModal } from '../../store/features/modal';
 
 const Header = () => {
   const menu = ["Blog", "Contacts", "Projects"];
   const [scrolled, setScrolled] = useState(false);
-  const dispatch=useAppDispatch()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,9 +58,11 @@ const Header = () => {
             <ThemeDropdown />
           </div>
           <div>
-            <Button onClick={()=>dispatch(setModal({modal:"login"}))} size='sm'>
-              Login
-            </Button>
+            <Link to={"/admin/login"} className="hidden md:flex items-center">
+                  <Button size="sm" className="w-full">
+                    Login
+                  </Button>
+                </Link>
           </div>
         </div>
         

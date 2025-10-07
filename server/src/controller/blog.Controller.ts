@@ -40,7 +40,7 @@ export class BlogController{
     public static async create(req:Request,res:Response){
         try{
             const {title,content}=req.body
-            const file=req.file ? `/public/uploads/${req.file.filename}` : null
+            const file=req.file ? `/uploads/${req.file.filename}` : null
             if(!title || !content || !file || !req.user){
                 res.status(400).json({msg:"Title and content required"})
                 return
@@ -66,7 +66,7 @@ export class BlogController{
                 res.status(404).json( {msg:"Blog not found"})
                 return
             }
-            const file = req.file ? `/public/uploads/${req.file.filename}` : null;
+            const file = req.file ? `/uploads/${req.file.filename}` : null;
             const slug=Slug(title)
             const updatedBlog= await blogs.updateBlog(Number(id),{title,content,cover_image:file,slug})
             if(!updatedBlog){
@@ -104,7 +104,7 @@ export class BlogController{
             const deleted=await blogs.deleteBlog(Number(id))
             
              if(deleted && existingUser?.cover_image){
-                const oldPath=path.join(__dirname,"../",existingUser.cover_image)
+                const oldPath=path.join(__dirname,"../public",existingUser.cover_image)
                
                 if(fs.existsSync(oldPath)){
                     fs.unlinkSync(oldPath)

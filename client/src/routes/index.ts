@@ -4,7 +4,8 @@ import Home from "../pages/Home";
 import AdminLayout from "../admin/Layout";
 import Login from "../admin/auth/login";
 import AdminHome from "../admin/page/home";
-
+import Blog from "../admin/page/blog";
+import BlogDetail from "../admin/page/blog/blogDetail";
 
 const router =createBrowserRouter([
     {
@@ -28,6 +29,18 @@ const router =createBrowserRouter([
             {
                 path:"login",
                 Component:Login
+            },
+            {
+                path:"blog",
+                Component:Blog
+            },
+            {
+
+            },
+            {
+                path:"blog/:slug",
+                Component:BlogDetail
+
             }
         ]
     

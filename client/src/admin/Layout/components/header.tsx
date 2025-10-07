@@ -6,11 +6,13 @@ import { IoMdMenu, IoMdContacts } from "react-icons/io";
 import { Link,useLocation } from "react-router";
 import { FaHome, FaBlog, FaProjectDiagram, FaUsers } from "react-icons/fa";
 import { useAppSelector } from "../../../store/hook";
+import Modal from "../../../components/modal";
 
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const location = useLocation();
   const {user}=useAppSelector(state=>state.login)
+  const modal=useAppSelector(state=>state.modal.isOpen)
 
   // dışarıya tıklayınca sidebar kapansın
   useEffect(() => {
@@ -31,6 +33,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="w-full fixed top-0 left-0 bg-white dark:bg-zinc-800 shadow-sm z-50">
+      {modal && <Modal />}
       <div className="container mx-auto py-3 px-4">
         <div className="flex items-center justify-between">
           {/* Sol - Menü + Logo */}
@@ -52,7 +55,7 @@ const Header: React.FC = () => {
                   </Button>
                 </Link>
              ): (
-              <Link to={"/login"} className="hidden md:flex items-center">
+              <Link to={"/admin/login"} className="hidden md:flex items-center">
                   <Button size="sm" className="w-full">
                     Login
                   </Button>
