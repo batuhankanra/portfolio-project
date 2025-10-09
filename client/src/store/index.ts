@@ -5,6 +5,7 @@ import loginSlice from "./features/auth/login"
 import modal from "./features/modal/index"
 import blogGetOne from "./features/blog/getOne"
 import contact from "./features/contact/getAll"
+import projects from "./features/projects/index"
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     modal,
     blog,
     blogGetOne,
-    contact
+    contact,
+    projects
   }
 })
 

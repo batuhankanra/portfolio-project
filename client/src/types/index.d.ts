@@ -64,3 +64,18 @@ interface ContactsState{
   status:"Idle" | "Loading" | "Error" | "Success"
   error:string
 }
+
+interface Project{
+  image_link:string
+  title:string,
+  link:string
+  description:string
+  repo_link:string
+  techStack:string[]
+  
+}
+interface ProjectsState{
+  projects:Project[]
+  status:"Idle" | "Loading" | "Error" | "Success"
+  error:string
+}
