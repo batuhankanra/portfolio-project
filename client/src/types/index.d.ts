@@ -51,3 +51,16 @@ interface BlogOneState{
   loading:boolean
   error:string | null
 }
+interface Contact{
+  id?:string
+  name:string
+  email:string
+  message:string
+  created_at:Date
+}
+
+interface ContactsState{
+  contact:Contact[]
+  status:"Idle" | "Loading" | "Error" | "Success"
+  error:string
+}

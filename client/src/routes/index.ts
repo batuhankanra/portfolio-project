@@ -6,6 +6,7 @@ import Login from "../admin/auth/login";
 import AdminHome from "../admin/page/home";
 import Blog from "../admin/page/blog";
 import BlogDetail from "../admin/page/blog/blogDetail";
+import Contacts from "../admin/page/contacts";
 
 const router =createBrowserRouter([
     {
@@ -41,6 +42,11 @@ const router =createBrowserRouter([
                 path:"blog/:slug",
                 Component:BlogDetail
 
+            },
+            {
+                path:"contacts",
+                Component:Contacts
+    
             }
         ]
     

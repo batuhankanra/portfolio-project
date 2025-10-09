@@ -4,6 +4,7 @@ import blog from "./features/blog/index"
 import loginSlice from "./features/auth/login"
 import modal from "./features/modal/index"
 import blogGetOne from "./features/blog/getOne"
+import contact from "./features/contact/getAll"
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     login:loginSlice,
     modal,
     blog,
-    blogGetOne
+    blogGetOne,
+    contact
   }
 })
 
